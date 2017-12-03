@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "sessiontocookie.sharedsecret",
+    "type": "java.lang.String",
+    "description": "Use a strong shared secret/password to share among all instances. No default will be provided for security reasons"
+  },
+  {
+    "name": "sessiontocookie.excludeurlpatterns",
+    "type": "java.lang.String",
+    "description": "an commaseparated list of ant-style urlpatterns that are to be excluded by the session-to-cookie-filter."
+  }
+]}

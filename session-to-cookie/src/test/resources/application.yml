@@ -1,0 +1,8 @@
+sessiontocookie:
+  excludeurlpatterns: /unfilteredslowmethod/**
+  sharedsecret: myawesometestingsharedsecretpassword
+
+logging:
+  level:
+    net.machs: debug
+    org.springframework.web.util: debug

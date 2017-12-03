@@ -1,0 +1,26 @@
+sessiontocookie:
+  excludeurlpatterns: /unfilteredslowmethod/**
+  sharedsecret: myawesometestingsharedsecretpassword
+
+logging:
+  level:
+    net.machs: debug
+    org.springframework.web.util: debug
+
+---
+
+spring:
+  profiles: perfomancetest
+
+sessiontocookie:
+  excludeurlpatterns: /unfilteredslowmethod/**
+  sharedsecret: myawesometestingsharedsecretpassword
+
+logging:
+  level:
+    ROOT: info
+    net.machs: info
+    org.springframework.web.util: info
+    net.machs.alanis.SpringSessionCookiePerfomanceTest: debug
+    org.apache.http: info
+    com.jayway.restassured: info
