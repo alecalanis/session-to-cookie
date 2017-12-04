@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: session2cookie-testapp
+  labels:
+    context: aa
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: session2cookie-testapp
+        context: aa
+    spec:
+      containers:
+      - name: session2cookie-container
+        image: alec/session-to-cookie-testapp:0.0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SESSIONTOCOOKIE_SHAREDSECRET
+          value: foobarbaz
+          
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: session2cookie-service
+  labels:
+    context: aa
+spec:
+  selector:
+    app: session2cookie-testapp
+    context: aa
+  ports:
+  - protocol: TCP
+    port: 8888
+    targetPort: 8080
+  type: NodePort

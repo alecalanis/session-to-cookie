@@ -1,0 +1,14 @@
+# image from official docker hub, alpine-linux with java8
+FROM java:alpine
+
+# blubb
+MAINTAINER https://github.com/alecalanis/session-to-cookie
+
+# port to expose from the container
+EXPOSE 8080
+
+# copy the jar into the container
+COPY target/session-to-cookie-testapp-0.0.1-SNAPSHOT.jar .
+
+# command to start the application, providing urandom for faster startup
+CMD ["java","-jar","session-to-cookie-testapp-0.0.1-SNAPSHOT.jar","-Djava.security.egd=file:/dev/./urandom"]

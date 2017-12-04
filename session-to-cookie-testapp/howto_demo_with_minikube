@@ -1,0 +1,47 @@
+# 1 start local minikube demo cluster
+minikube start
+
+# 2 IMPORTANT! without this, your docker commands will work on your local repo, not the shared repo used by minikube.
+eval $(minikube docker-env)
+
+# 3 create docker image
+mvn clean install
+docker build -t alec/session-to-cookie-testapp:0.0.1 .
+
+## 4 for production use (for more verbose demoing of kubernetes, see below)
+kubectl create -f session-to-cookie-testapp_kubernetes.yaml
+
+# 5 get url to service for demoing
+minikube service session-to-cookie --url
+
+# 6 clean up :)
+kubectl delete -f session-to-cookie-testapp_kubernetes.yaml
+
+
+################
+# from step 3 on, you can also continue demoing NOT using the yaml file, if your audience needs to see kubernetes in action more detailed
+
+# make sure the image is in the minikube provided docker repository
+docker images | grep session-to-cookie
+
+# check running cluster
+kubectl cluster-info
+kubectl get node
+kubectl get pod
+
+# open dashboard in browser
+minikube dashboard
+
+# start image
+kubectl run s2capp --image=alec/session-to-cookie-testapp:0.0.1 --port=8080
+kubectl get pod
+
+# running? expose service so you can test it
+kubectl expose deployment s2capp --type=NodePort
+
+# get ip + port of running service
+minikube service s2capp --url
+# call the ip you got for demoing your app.
+
+kubectl delete service s2capp
+kubectl delete deployment s2capp

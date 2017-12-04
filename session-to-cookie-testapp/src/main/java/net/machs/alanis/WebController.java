@@ -1,5 +1,8 @@
 package net.machs.alanis;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,10 +41,10 @@ public class WebController {
 	public String handleSessioncheck(HttpServletRequest servletRequest) {
 		HttpSession session = servletRequest.getSession(false);
 		if (session == null) {
-			return "hello, you have no session";
+			return "hello, you have no session\n" + getHostInfo();
 
 		} else {
-			return "hello, your session is: " + session + ", your name is: " + session.getAttribute(NAME);
+			return "hello, your session is: " + session + ", your name is: " + session.getAttribute(NAME) + "\n" + getHostInfo();
 		}
 	}
 
@@ -61,7 +64,7 @@ public class WebController {
 			log.debug("created new empty session");
 			session = servletRequest.getSession(true);
 		}
-		return "hello, your session is: " + session;
+		return "hello, your session is: " + session + "\n" + getHostInfo();
 	}
 
 	/**
@@ -83,7 +86,7 @@ public class WebController {
 			session = servletRequest.getSession(true);
 			session.setAttribute(NAME, name);
 		}
-		return "hello, your session is: " + session + ", your name is: " + session.getAttribute(NAME);
+		return "hello, your session is: " + session + ", your name is: " + session.getAttribute(NAME) + "\n" + getHostInfo();
 	}
 
 	/**
@@ -106,7 +109,7 @@ public class WebController {
 			session.setAttribute("complex", new SessionObject(name));
 		}
 		return "hello, your session is: " + session + ", your name is: "
-				+ ((SessionObject) session.getAttribute("complex")).getName();
+				+ ((SessionObject) session.getAttribute("complex")).getName() + "\n" + getHostInfo();
 	}
 
 	@RequestMapping("/slowmethod/{name}")
@@ -129,13 +132,24 @@ public class WebController {
 			count++;
 		}
 		return "hello, your session is: " + session + ", count is: " + count + " elapsed time is: "+stopwatch.elapsed(TimeUnit.MILLISECONDS)+", your name is: "
-				+ ((SessionObject) session.getAttribute("complex")).getName();
+				+ ((SessionObject) session.getAttribute("complex")).getName() + "\n" + getHostInfo();
 	}
 
 	@RequestMapping("/unfilteredslowmethod/{name}")
 	@ResponseBody
 	public String handleSlowMethodUnfiltered(HttpServletRequest servletRequest, @PathVariable("name") String name) {
 		return handleSlowMethod(servletRequest, name);
+	}
+	
+	protected String getHostInfo() {
+		String string = "";
+		try {
+			string += " (host: " + InetAddress.getLocalHost().getHostName() + ", ip: "
+					+ InetAddress.getLocalHost().getHostAddress() + ", date: " + new Date().toString() + ")";
+		} catch (UnknownHostException e) {
+			log.error("", e);
+		}
+		return string;
 	}
 
 }

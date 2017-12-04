@@ -39,6 +39,8 @@ For running the testapp locally, use the local profile which brings some default
 	$ cd session-to-cookie-testapp
 	$ mvn spring-boot:run -Drun.jvmArguments="-Dspring.profiles.active=local"
 	
+# Need a demo?
+In session-to-cookie-testapp you'll find a dockerfile, a "howto\_demo\_with\_minikube" file and a yaml file. Read the howto to see how you can create a docker image out of the testapp, create a local minikube cluster and how to deploy it on that cluster. See the endpoints in the WebController class on what calls to do for demoing.
 
 # TODOs
 * make cookie valid as long as server session timeouts would be (with configurable override, if you want other timeouts)? Since we use the cookie as a session cookie, this should not be necessary.
