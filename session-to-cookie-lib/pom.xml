@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>session-to-cookie</artifactId>
+	<artifactId>session-to-cookie-lib</artifactId>
 	<name>session to cookie filter library</name>
 
 	<properties>

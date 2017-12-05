@@ -45,12 +45,12 @@
 		</dependency>
 		<dependency>
 			<groupId>net.machs.alanis</groupId>
-			<artifactId>session-to-cookie</artifactId>
+			<artifactId>session-to-cookie-lib</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.machs.alanis</groupId>
-			<artifactId>session-to-cookie</artifactId>
+			<artifactId>session-to-cookie-lib</artifactId>
 			<version>${project.version}</version>
 			<type>test-jar</type>
 		</dependency>

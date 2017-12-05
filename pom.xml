@@ -21,7 +21,7 @@
 	</properties>
 	
 	<modules>
-		<module>session-to-cookie</module>
+		<module>session-to-cookie-lib</module>
 		<module>session-to-cookie-testapp</module>
 	</modules>
 	
